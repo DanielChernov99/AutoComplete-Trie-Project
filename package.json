@@ -1,0 +1,23 @@
+{
+  "name": "autocomplete-trie-project",
+  "version": "1.0.0",
+  "main": "AutoCompleteTrie.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielChernov99/AutoComplete-Trie-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielChernov99/AutoComplete-Trie-Project/issues"
+  },
+  "homepage": "https://github.com/DanielChernov99/AutoComplete-Trie-Project#readme",
+  "description": "",
+  "devDependencies": {
+    "jest": "^30.4.2"
+  }
+}
