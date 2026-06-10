@@ -8,30 +8,24 @@ export default class AutoCompleteController {
         const isValid = this.validateArgs(userInput)
         if(isValid.result === false) return {result:false , message:isValid.message, commandType:"Invalid"}
         const command = isValid.command
-        const word
+        const word = isValid.word
         switch(command){
             case "add":
                 word = isValid.word
-                return {result:true , message:"added word successfuly", commandType:"add"}
-                break;
+                return {result:true , message:"added word successfuly", commandType:"add"}       
             case "complete":
                 word = isValid.word
                 return {result:true , message:"suggest word successfuly", commandType:"complete"}
-                break;
             case "find":
                 word = isValid.word
                 return {result:true , message:"found function worked", commandType:"find"}
-                break;
             case "use":
                 word = isValid.word
-                return {result:true , message:"added frequncy successfuly", commandType:"use"}
-                break;
+                return {result:true , message:"added frequncy successfuly", commandType:"use"}  
             case "help":
-                return {result:true , message:"suggested help", commandType:"help"}
-                break;
+                return {result:true , message:"suggested help", commandType:"help"}                
             case "exit":
-                return {result:true , message:"GoodBye", commandType:"exit"}
-                break;
+                return {result:true , message:"GoodBye", commandType:"exit"}               
         }
 
     }
