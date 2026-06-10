@@ -5,6 +5,34 @@ export default class AutoCompleteController {
     }
 
     handleCommand(userInput){
+        const isValid = this.validateArgs(userInput)
+        if(isValid.result === false) return {result:false , message:isValid.message, commandType:"Invalid"}
+        const command = isValid.command
+        const word
+        switch(command){
+            case "add":
+                word = isValid.word
+                return {result:true , message:"added word successfuly", commandType:"add"}
+                break;
+            case "complete":
+                word = isValid.word
+                return {result:true , message:"suggest word successfuly", commandType:"complete"}
+                break;
+            case "find":
+                word = isValid.word
+                return {result:true , message:"found function worked", commandType:"find"}
+                break;
+            case "use":
+                word = isValid.word
+                return {result:true , message:"added frequncy successfuly", commandType:"use"}
+                break;
+            case "help":
+                return {result:true , message:"suggested help", commandType:"help"}
+                break;
+            case "exit":
+                return {result:true , message:"GoodBye", commandType:"exit"}
+                break;
+        }
 
     }
     validateArgs(userInput){
@@ -15,6 +43,7 @@ export default class AutoCompleteController {
         if (inputArr.length > 2) return {result: false, message:"Too many arguments"}
 
         const command = inputArr[0].toLowerCase()
+        const word = inputArr[1]?.toLowerCase()
         const wordCommands = ["add","complete","use","find"]
         const noWordCommands = ["help","exit"]
         const allCommands = [...wordCommands, ...noWordCommands]
@@ -22,19 +51,17 @@ export default class AutoCompleteController {
         if(!(allCommands).includes(command)){
             return {result: false, message:"please enter a valid command"}
         }
-        if(wordCommands.includes(command)){
-            const word = inputArr[1]
+        if(wordCommands.includes(command)){          
             if (!word) return {result: false, message:"please enter the word aswell"}
             if (!/^[a-zA-Z]+$/.test(word)) {
                 return { result: false, message: "word must contain only letters" }
             }
         }
         else{
-            const word = inputArr[1]
             if (word) return {result: false, message:"please try this command without a word"}
         }       
 
-        return { result: true ,message:"User input is valid"}
+        return { result: true ,message:"User input is valid",command:command,word:word}
     }
 }
 
