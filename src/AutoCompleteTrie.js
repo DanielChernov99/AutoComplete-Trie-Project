@@ -20,4 +20,12 @@ export default class AutoCompleteTrie{
         if (!this.children[word.charAt(0)]) return false
         return this.children[word.charAt(0)].findWord(word.slice(1))
     }
+
+
+    _getRemainingTree(prefix, node){
+        if(prefix === "") return node
+        const char = prefix.charAt(0)
+        if (!node.children[char]) return null
+        return this._getRemainingTree(prefix.slice(1),node.children[char])
+    }
 }
