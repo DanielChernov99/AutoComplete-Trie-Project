@@ -28,4 +28,12 @@ export default class AutoCompleteTrie{
         if (!node.children[char]) return null
         return this._getRemainingTree(prefix.slice(1),node.children[char])
     }
+
+    _allWordsHelper(prefix, node, allWords){        
+        if(node.endOfWord) allWords.push(prefix)
+        Object.values(node.children).forEach(n => {
+             this._allWordsHelper(prefix + n.value,n,allWords)
+        });
+        return allWords
+    }
 }
