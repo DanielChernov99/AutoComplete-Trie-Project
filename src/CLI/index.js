@@ -14,6 +14,7 @@ cliView.showWelcome()
 
 while(running){
     let userInput = prompt("> ")
+    
 
 
 

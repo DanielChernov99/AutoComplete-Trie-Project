@@ -11,16 +11,15 @@ export default class AutoCompleteController {
         const word = isValid.word
         switch(command){
             case "add":
-                word = isValid.word
+                this.trie.addWord(word)
                 return {result:true , message:"added word successfuly", commandType:"add"}       
             case "complete":
-                word = isValid.word
-                return {result:true , message:"suggest word successfuly", commandType:"complete"}
+                const completedWords = this.trie.predictWords(word)                              
+                return {result:true , message:"suggest word successfuly", commandType:"complete",data:completedWords}
             case "find":
-                word = isValid.word
-                return {result:true , message:"found function worked", commandType:"find"}
+                const isExist = this.findWord(word)
+                return {result:true , message:"found function worked", commandType:"find",data:isExist}
             case "use":
-                word = isValid.word
                 return {result:true , message:"added frequncy successfuly", commandType:"use"}  
             case "help":
                 return {result:true , message:"suggested help", commandType:"help"}                
