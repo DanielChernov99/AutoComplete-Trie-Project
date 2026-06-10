@@ -30,16 +30,12 @@ export default class AutoCompleteTrie{
         this._allWordsHelper(prefix,finalPrefixNode,predictedWords) // use helper function to find all the suggestions
 
         predictedWords = predictedWords.sort((a,b) => {
-            let finalNodeA = this._getRemainingTree(a,this)
-            let finalNodeB = this._getRemainingTree(b,this)
-            if (finalNodeA.frequency !== finalNodeB.frequency) return finalNodeB.frequency - finalNodeA.frequency
-            return a.length - b.length
-        })
-        // this is if i want to make limit on depth of suggestion 
-        // predictedWords = predictedWords.filter(w =>{
-        //     return w.length - prefix.length <= 2 
-        // })
+            if (a.frequency !== b.frequency) {
+                return b.frequency - a.frequency
+            }
 
+            return a.word.length - b.word.length
+            })
         return predictedWords
     }
 
@@ -61,7 +57,7 @@ export default class AutoCompleteTrie{
     }
 
     _allWordsHelper(prefix, node, allWords){        
-        if(node.endOfWord) allWords.push(prefix)
+        if(node.endOfWord) allWords.push({word:prefix,frequency: node.frequency})
         Object.values(node.children).forEach(n => {
              this._allWordsHelper(prefix + n.value,n,allWords)
         });
