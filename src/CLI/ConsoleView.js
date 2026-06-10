@@ -33,7 +33,17 @@ export default class ConsoleView{
                     console.log(`✓ Added '${commandResult.wordUsed}' to dictionary\n`)
                     break;
                 case "complete":
-                    console.log(`Suggestion for '${commandResult.wordUsed}:' ${commandResult.data}\n`)
+                    if(commandResult.data.length === 0){
+                        console.log(`No suggestions found for '${commandResult.wordUsed}'\n`)
+                    }
+                    else{
+                        const suggestions = commandResult.data
+                            .map(item => `${item.word} (${item.frequency})`)
+                            .join(", ")
+
+                        console.log(`Suggestions for '${commandResult.wordUsed}': ${suggestions}\n`)
+                    }
+                    break
                 case "find":
                 case "use":
                 case "help":
