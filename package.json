@@ -1,22 +1,12 @@
 {
   "name": "autocomplete-trie-project",
   "version": "1.0.0",
-  "main": "AutoCompleteTrie.js",
+  "description": "Console-based autocomplete application using a Trie data structure",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DanielChernov99/AutoComplete-Trie-Project.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DanielChernov99/AutoComplete-Trie-Project/issues"
-  },
-  "homepage": "https://github.com/DanielChernov99/AutoComplete-Trie-Project#readme",
-  "description": "",
   "devDependencies": {
     "jest": "^30.4.2"
   }
