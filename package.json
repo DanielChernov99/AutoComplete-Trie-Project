@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "jest": "^30.4.2"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
   }
 }
