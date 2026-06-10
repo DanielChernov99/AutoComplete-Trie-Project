@@ -21,7 +21,17 @@ export default class AutoCompleteTrie{
         return this.children[word.charAt(0)].findWord(word.slice(1))
     }
 
+    // const result = trie.predictWords("ca")
+    predictWords(prefix){
+        const finalPrefixNode = this._getRemainingTree(prefix,this) // found the last prefix node
+        const predictedWords = []
+        this._allWordsHelper(prefix,finalPrefixNode,predictedWords)
+        return predictedWords
+    }
 
+    // ------------------------------------
+    // --------- helper function-----------
+    // ------------------------------------
     _getRemainingTree(prefix, node){
         if(prefix === "") return node
         const char = prefix.charAt(0)
