@@ -1,4 +1,4 @@
-
+import AutoCompleteTrie from "./AutoCompleteTrie.js"
 export default class AutoCompleteController {
     constructor(trie = new AutoCompleteTrie()){
         this.trie = trie
@@ -12,19 +12,19 @@ export default class AutoCompleteController {
         switch(command){
             case "add":
                 this.trie.addWord(word)
-                return {result:true , message:"added word successfuly", commandType:"add"}       
+                return {result:true , wordUsed:word, commandType:"add",data:word}       
             case "complete":
                 const completedWords = this.trie.predictWords(word)                              
-                return {result:true , message:"suggest word successfuly", commandType:"complete",data:completedWords}
+                return {result:true , wordUsed:word, commandType:"complete",data:completedWords}
             case "find":
-                const isExist = this.findWord(word)
-                return {result:true , message:"found function worked", commandType:"find",data:isExist}
+                const isExist = this.trie.findWord(word)
+                return {result:true , wordUsed:word, commandType:"find",data:isExist}
             case "use":
-                return {result:true , message:"added frequncy successfuly", commandType:"use"}  
+                return {result:true , wordUsed:word, commandType:"use"}  
             case "help":
-                return {result:true , message:"suggested help", commandType:"help"}                
+                return {result:true , wordUsed:null, commandType:"help"}                
             case "exit":
-                return {result:true , message:"GoodBye", commandType:"exit"}               
+                return {result:true , wordUsed:null, commandType:"exit"}               
         }
 
     }

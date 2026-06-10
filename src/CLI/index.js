@@ -1,6 +1,6 @@
-import AutoCompleteTrie from "../AutoCompleteTrie"
-import AutoCompleteController from "../AutoCompleteController"
-import ConsoleView from "./ConsoleView"
+import AutoCompleteTrie from "../AutoCompleteTrie.js"
+import AutoCompleteController from "../AutoCompleteController.js"
+import ConsoleView from "./ConsoleView.js"
 import promptSync from "prompt-sync"
 
 
@@ -14,11 +14,10 @@ cliView.showWelcome()
 
 while(running){
     let userInput = prompt("> ")
-    
-
-
-
-    if(placeholder.result ==="exit"){
+    const commandResult = trieController.handleCommand(userInput)
+    if(commandResult.commandType ==="exit"){
         running = false
     }
+    cliView.showResult(commandResult)
+    
 }
