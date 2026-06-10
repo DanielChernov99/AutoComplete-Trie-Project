@@ -15,4 +15,9 @@ export default class AutoCompleteTrie{
         }
         currentNode.endOfWord = true
     }
+    findWord(word){
+        if(word === "" && this.endOfWord) return true
+        if (!this.children[word.charAt(0)]) return false
+        return this.children[word.charAt(0)].findWord(word.slice(1))
+    }
 }
