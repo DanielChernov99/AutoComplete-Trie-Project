@@ -3,6 +3,7 @@ export default class AutoCompleteTrie{
         this.value = value
         this.children = {}
         this.endOfWord = false
+        this.frequency = 0
     }
     addWord(word){
         let currentNode = this
@@ -34,6 +35,13 @@ export default class AutoCompleteTrie{
         // })
 
         return predictedWords
+    }
+
+    useWord(word){
+        const finalPrefixNode = this._getRemainingTree(word,this)
+        if(!finalWordNode || !finalWordNode.endOfWord) return false
+        finalWordNode.frequency++
+        return true
     }
 
     // ------------------------------------
