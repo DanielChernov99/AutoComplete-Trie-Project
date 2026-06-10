@@ -23,7 +23,7 @@ describe("AutoCompleteTrie", () => {
             ]))
         })
 
-        test("should return suggestions sorted by word length from shortest to longest", () => {
+        test("should return suggestions sorted by word length from shortest to longest when frequency is equal", () => {
             const trie = new AutoCompleteTrie()
 
             trie.addWord("carbon")
@@ -40,7 +40,7 @@ describe("AutoCompleteTrie", () => {
             expect(lengths).toEqual(sortedLengths)
         })
 
-        test("should not care about order between words with the same length", () => {
+        test("should not care about order between words with the same frequency and same length", () => {
             const trie = new AutoCompleteTrie()
 
             trie.addWord("cat")
@@ -66,6 +66,45 @@ describe("AutoCompleteTrie", () => {
                 "card",
                 "care"
             ]))
+        })
+
+        test("should put higher frequency words before shorter words", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("car")
+            trie.addWord("carbon")
+            trie.addWord("cat")
+
+            trie.useWord("carbon")
+            trie.useWord("carbon")
+
+            const result = trie.predictWords("ca")
+
+            expect(result[0]).toBe("carbon")
+            expect(result.indexOf("carbon")).toBeLessThan(result.indexOf("car"))
+            expect(result.indexOf("carbon")).toBeLessThan(result.indexOf("cat"))
+        })
+
+        test("should sort by word length after frequency tie", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("carbon")
+            trie.addWord("card")
+            trie.addWord("car")
+            trie.addWord("cat")
+
+            trie.useWord("carbon")
+            trie.useWord("card")
+            trie.useWord("car")
+
+            const result = trie.predictWords("ca")
+
+            expect(result.slice(0, 3)).toEqual([
+                "car",
+                "card",
+                "carbon"
+            ])
+            expect(result[3]).toBe("cat")
         })
 
         test("should include the prefix itself if the prefix is a complete word", () => {
@@ -118,7 +157,7 @@ describe("AutoCompleteTrie", () => {
             expect(result).toEqual([])
         })
 
-        test("should return all words sorted by length when prefix is an empty string", () => {
+        test("should return all words sorted by frequency first when prefix is an empty string", () => {
             const trie = new AutoCompleteTrie()
 
             trie.addWord("elephant")
@@ -127,21 +166,20 @@ describe("AutoCompleteTrie", () => {
             trie.addWord("car")
             trie.addWord("card")
 
+            trie.useWord("elephant")
+            trie.useWord("elephant")
+            trie.useWord("card")
+
             const result = trie.predictWords("")
 
             expect(result).toHaveLength(5)
-            expect(result).toEqual(expect.arrayContaining([
+            expect(result[0]).toBe("elephant")
+            expect(result[1]).toBe("card")
+            expect(result.slice(2)).toEqual(expect.arrayContaining([
                 "cat",
                 "dog",
-                "car",
-                "card",
-                "elephant"
+                "car"
             ]))
-
-            const lengths = result.map(word => word.length)
-            const sortedLengths = [...lengths].sort((a, b) => a - b)
-
-            expect(lengths).toEqual(sortedLengths)
         })
 
         test("should not return words that do not start with the prefix", () => {
@@ -151,6 +189,9 @@ describe("AutoCompleteTrie", () => {
             trie.addWord("car")
             trie.addWord("dog")
             trie.addWord("door")
+
+            trie.useWord("dog")
+            trie.useWord("door")
 
             const result = trie.predictWords("ca")
 
@@ -198,6 +239,16 @@ describe("AutoCompleteTrie", () => {
             expect(cNode.endOfWord).toBe(false)
             expect(aNode.endOfWord).toBe(false)
             expect(tNode.endOfWord).toBe(true)
+        })
+
+        test("should keep frequency 0 when adding a new word", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("cat")
+
+            const tNode = trie.children["c"].children["a"].children["t"]
+
+            expect(tNode.frequency).toBe(0)
         })
 
         test("should reuse existing path when adding a word with the same prefix", () => {
@@ -302,8 +353,42 @@ describe("AutoCompleteTrie", () => {
         })
     })
 
-    describe("predictWords", () => {
-        // tests
+    describe("useWord", () => {
+        test("should return true when the word exists", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("cat")
+
+            expect(trie.useWord("cat")).toBe(true)
+        })
+
+        test("should increment frequency for an existing word", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("cat")
+            trie.useWord("cat")
+            trie.useWord("cat")
+
+            const catNode = trie.children["c"].children["a"].children["t"]
+
+            expect(catNode.frequency).toBe(2)
+        })
+
+        test("should return false when the word does not exist", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("cat")
+
+            expect(trie.useWord("dog")).toBe(false)
+        })
+
+        test("should return false when the given word is only a prefix and not a full word", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("card")
+
+            expect(trie.useWord("car")).toBe(false)
+        })
     })
 
     describe("_allWordsHelper", () => {
@@ -360,6 +445,7 @@ describe("AutoCompleteTrie", () => {
 
             expect(allWords).toEqual(["dog"])
         })
+
         test("should not add anything when node is not endOfWord and has no children", () => {
             const trie = new AutoCompleteTrie()
             const node = new AutoCompleteTrie("x")
@@ -369,6 +455,7 @@ describe("AutoCompleteTrie", () => {
 
             expect(allWords).toEqual([])
         })
+
         test("should collect all words from the root when prefix is empty", () => {
             const trie = new AutoCompleteTrie()
 
@@ -387,6 +474,7 @@ describe("AutoCompleteTrie", () => {
                 "car"
             ]))
         })
+
         test("should not include words that are outside the given prefix node", () => {
             const trie = new AutoCompleteTrie()
 

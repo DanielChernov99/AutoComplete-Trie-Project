@@ -29,7 +29,13 @@ export default class AutoCompleteTrie{
         let predictedWords = []   
         this._allWordsHelper(prefix,finalPrefixNode,predictedWords) // use helper function to find all the suggestions
 
-        predictedWords = predictedWords.sort((a,b) => a.length - b.length)
+        predictedWords = predictedWords.sort((a,b) => {
+            let finalNodeA = this._getRemainingTree(a,this)
+            let finalNodeB = this._getRemainingTree(b,this)
+            if (finalNodeA.frequency !== finalNodeB.frequency) return finalNodeB.frequency - finalNodeA.frequency
+            return a.length - b.length
+        })
+        // this is if i want to make limit on depth of suggestion 
         // predictedWords = predictedWords.filter(w =>{
         //     return w.length - prefix.length <= 2 
         // })
@@ -39,8 +45,8 @@ export default class AutoCompleteTrie{
 
     useWord(word){
         const finalPrefixNode = this._getRemainingTree(word,this)
-        if(!finalWordNode || !finalWordNode.endOfWord) return false
-        finalWordNode.frequency++
+        if(!finalPrefixNode || !finalPrefixNode.endOfWord) return false
+        finalPrefixNode.frequency++
         return true
     }
 
