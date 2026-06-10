@@ -201,6 +201,52 @@ describe("AutoCompleteTrie", () => {
 
             expect(allWords).toEqual(["dog"])
         })
+        test("should not add anything when node is not endOfWord and has no children", () => {
+            const trie = new AutoCompleteTrie()
+            const node = new AutoCompleteTrie("x")
+            const allWords = []
+
+            trie._allWordsHelper("x", node, allWords)
+
+            expect(allWords).toEqual([])
+        })
+        test("should collect all words from the root when prefix is empty", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("cat")
+            trie.addWord("dog")
+            trie.addWord("car")
+
+            const allWords = []
+
+            trie._allWordsHelper("", trie, allWords)
+
+            expect(allWords).toHaveLength(3)
+            expect(allWords).toEqual(expect.arrayContaining([
+                "cat",
+                "dog",
+                "car"
+            ]))
+        })
+        test("should not include words that are outside the given prefix node", () => {
+            const trie = new AutoCompleteTrie()
+
+            trie.addWord("cat")
+            trie.addWord("car")
+            trie.addWord("dog")
+
+            const prefixNode = trie.children["c"]
+            const allWords = []
+
+            trie._allWordsHelper("c", prefixNode, allWords)
+
+            expect(allWords).toEqual(expect.arrayContaining([
+                "cat",
+                "car"
+            ]))
+
+            expect(allWords).not.toContain("dog")
+        })
     })
 
     describe("_getRemainingTree", () => {
