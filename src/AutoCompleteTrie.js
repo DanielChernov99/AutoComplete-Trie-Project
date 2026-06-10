@@ -29,6 +29,9 @@ export default class AutoCompleteTrie{
         this._allWordsHelper(prefix,finalPrefixNode,predictedWords) // use helper function to find all the suggestions
 
         predictedWords = predictedWords.sort((a,b) => a.length - b.length)
+        // predictedWords = predictedWords.filter(w =>{
+        //     return w.length - prefix.length <= 2 
+        // })
 
         return predictedWords
     }
