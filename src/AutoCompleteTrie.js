@@ -24,8 +24,12 @@ export default class AutoCompleteTrie{
     // const result = trie.predictWords("ca")
     predictWords(prefix){
         const finalPrefixNode = this._getRemainingTree(prefix,this) // found the last prefix node
-        const predictedWords = []
-        this._allWordsHelper(prefix,finalPrefixNode,predictedWords)
+        if(!finalPrefixNode) return []   //check if this prefix exist in the trie
+        let predictedWords = []   
+        this._allWordsHelper(prefix,finalPrefixNode,predictedWords) // use helper function to find all the suggestions
+
+        predictedWords = predictedWords.sort((a,b) => a.length - b.length)
+
         return predictedWords
     }
 
