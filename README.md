@@ -3,23 +3,17 @@
 A console-based autocomplete application built with JavaScript and a Trie data structure.
 
 The app allows users to add words, search for words, and get autocomplete suggestions based on a prefix.
+Suggestions are ranked by word usage frequency.
 
 ## Features
 
 * Add words to the dictionary
 * Find if a word exists
-* Get autocomplete suggestions
+* Get autocomplete suggestions by prefix
 * Track word usage frequency
 * Rank suggestions by frequency
 * Console-based interface
 * Unit tests with Jest
-
-## Technologies
-
-* JavaScript
-* Node.js
-* Jest
-* prompt-sync
 
 ## Commands
 
@@ -78,44 +72,28 @@ Run tests with coverage:
 npm test -- --coverage
 ```
 
-## Project Structure
+## Main Structure
 
-```txt
-src/
-├── AutoCompleteTrie.js
-├── AutoCompleteController.js
-└── CLI/
-    ├── ConsoleView.js
-    └── index.js
-
-tests/
-```
-
-## Main Classes
+The project was built with a clear separation of responsibilities, inspired by an MVC-style structure:
 
 ### AutoCompleteTrie
 
-Handles the Trie logic:
-
-* adding words
-* finding words
-* predicting completions
-* tracking frequency
+Handles the core Trie logic, including adding words, searching words, autocomplete suggestions, and word frequency.
 
 ### AutoCompleteController
 
-Handles user commands and input validation.
+Handles user commands and connects the console input to the Trie logic.
 
 ### ConsoleView
 
-Handles console output.
+Handles the console output shown to the user.
 
 ## Future Improvements
 
 * Add a web UI
 * Save words to a file or database
 * Add delete word option
-* Add more tests for the controller
+* Add more tests for the controller and console view
 
 ## Author
 
