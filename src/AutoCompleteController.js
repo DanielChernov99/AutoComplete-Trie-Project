@@ -14,7 +14,7 @@ export default class AutoCompleteController {
                 this.trie.addWord(word)
                 return {result:true , wordUsed:word, commandType:"add",data:word}       
             case "complete":
-                const completedWords = this.trie.predictWords(word)                              
+                const completedWords = this.trie.pregdictWords(word)                              
                 return {result:true , wordUsed:word, commandType:"complete",data:completedWords}
             case "find":
                 const isExist = this.trie.findWord(word)
@@ -27,7 +27,6 @@ export default class AutoCompleteController {
             case "exit":
                 return {result:true , wordUsed:null, commandType:"exit"}               
         }
-
     }
     validateArgs(userInput){
         if(!userInput) return {result: false,message:"please enter command and word"}
@@ -55,8 +54,7 @@ export default class AutoCompleteController {
             if (word) return {result: false, message:"please try this command without a word"}
         }       
 
-        return { result: true ,message:"User input is valid",command:command,word:word}
+        return {result: true ,message:"User input is valid",command:command,word:word}
     }
 }
-
 

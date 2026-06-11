@@ -6,7 +6,7 @@ import promptSync from "prompt-sync"
 
 let running = true
 const trieController = new AutoCompleteController()
-const cliView = new ConsoleView()
+const cliView = new ConsoleView() 
 const prompt = promptSync()
 
 
