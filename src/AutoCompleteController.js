@@ -20,7 +20,8 @@ export default class AutoCompleteController {
                 const isExist = this.trie.findWord(word)
                 return {result:true , wordUsed:word, commandType:"find",data:isExist}
             case "use":
-                return {result:true , wordUsed:word, commandType:"use"}  
+                const afterUse = this.trie.useWord(word)                                    
+                return {result:true , wordUsed:word, commandType:"use",data:afterUse}  
             case "help":
                 return {result:true , wordUsed:null, commandType:"help"}                
             case "exit":

@@ -55,6 +55,7 @@ exit           - Quit program
                     break;
 
                 case "use":
+                    console.log(`✓ Incremented usage for '${commandResult.wordUsed}' (now ${commandResult.data.frequency}) \n`)
                     break;
                 case "help":
                     this.showHelp()

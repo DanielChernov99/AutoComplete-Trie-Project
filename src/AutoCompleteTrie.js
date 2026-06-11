@@ -43,7 +43,7 @@ export default class AutoCompleteTrie{
         const finalPrefixNode = this._getRemainingTree(word,this)
         if(!finalPrefixNode || !finalPrefixNode.endOfWord) return false
         finalPrefixNode.frequency++
-        return true
+        return {result:true,frequency: finalPrefixNode.frequency}
     }
 
     // ------------------------------------
