@@ -21,13 +21,13 @@ export default class AutoCompleteTrie{
         if (!this.children[word.charAt(0)]) return false
         return this.children[word.charAt(0)].findWord(word.slice(1))
     }
+    
 
-    // const result = trie.predictWords("ca")
     predictWords(prefix){
-        const finalPrefixNode = this._getRemainingTree(prefix,this) // found the last prefix node
-        if(!finalPrefixNode) return []   //check if this prefix exist in the trie
+        const finalPrefixNode = this._getRemainingTree(prefix,this) 
+        if(!finalPrefixNode) return []  
         let predictedWords = []   
-        this._allWordsHelper(prefix,finalPrefixNode,predictedWords) // use helper function to find all the suggestions
+        this._allWordsHelper(prefix,finalPrefixNode,predictedWords) 
 
         predictedWords = predictedWords.sort((a,b) => {
             if (a.frequency !== b.frequency) {

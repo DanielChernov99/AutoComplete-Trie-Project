@@ -14,7 +14,7 @@ export default class AutoCompleteController {
                 this.trie.addWord(word)
                 return {result:true , wordUsed:word, commandType:"add",data:word}       
             case "complete":
-                const completedWords = this.trie.pregdictWords(word)                              
+                const completedWords = this.trie.predictWords(word)                              
                 return {result:true , wordUsed:word, commandType:"complete",data:completedWords}
             case "find":
                 const isExist = this.trie.findWord(word)

@@ -1,18 +1,21 @@
 export default class ConsoleView{
     constructor(){
 
-    }   
+    } 
 
     showWelcome(){
         console.log("=== AutoComplete Trie Console ===")
         console.log("Type 'help' for commands\n")
     }
+
     showError(errorMessage){
         console.log(`✗ ${errorMessage}\n`)
     }
+
     showSuccess(succsessMessage){
         console.log(`✓ ${succsessMessage}`)
     }
+
     showHelp(){   
         console.log(`Commands:
 add <word>      - Add word to dictionary
@@ -66,7 +69,7 @@ exit           - Quit program
                     this.showHelp()
                     break;
                 case "exit":
-                    console.log("Goodbye")
+                    console.log("Goodbye!")
             }
         }
     }
