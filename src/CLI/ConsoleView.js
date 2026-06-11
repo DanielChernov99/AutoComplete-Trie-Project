@@ -46,7 +46,16 @@ exit           - Quit program
                     }
                     break
                 case "find":
+                    if(commandResult.data === true){
+                        console.log(`✓  '${commandResult.wordUsed}' exists in dictionary\n`)
+                    }
+                    else{
+                        console.log(`✗  '${commandResult.wordUsed}' not found in dictionary\n`)
+                    }
+                    break;
+
                 case "use":
+                    break;
                 case "help":
                     this.showHelp()
                     break;
