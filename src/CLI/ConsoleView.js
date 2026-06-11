@@ -15,12 +15,12 @@ export default class ConsoleView{
     }
     showHelp(){   
         console.log(`Commands:
-                add <word>      - Add word to dictionary
-                find <word>     - Check if word exists
-                complete <prefix> - Get completions
-                help           - Show this message
-                exit           - Quit program  
-        `)
+add <word>      - Add word to dictionary
+find <word>     - Check if word exists
+complete <prefix> - Get completions
+help           - Show this message
+exit           - Quit program  
+                    `)
     }
     showResult(commandResult){
         if(commandResult.result === false){
@@ -42,12 +42,16 @@ export default class ConsoleView{
                             .join(", ")
 
                         console.log(`Suggestions for '${commandResult.wordUsed}': ${suggestions}\n`)
+                        break;
                     }
                     break
                 case "find":
                 case "use":
                 case "help":
+                    this.showHelp()
+                    break;
                 case "exit":
+                    console.log("Goodbye")
             }
         }
     }
