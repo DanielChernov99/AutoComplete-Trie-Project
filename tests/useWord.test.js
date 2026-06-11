@@ -7,7 +7,7 @@ describe("useWord", () => {
 
             trie.addWord("cat")
 
-            expect(trie.useWord("cat")).toBe(true)
+            expect(trie.useWord("cat")).toEqual({result: true,frequency: 1})
         })
 
         test("should increment frequency for an existing word", () => {
