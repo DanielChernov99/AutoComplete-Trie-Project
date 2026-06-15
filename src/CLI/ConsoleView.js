@@ -21,7 +21,7 @@ export default class ConsoleView{
 add <word>        - Add word to dictionary
 find <word>       - Check if word exists
 complete <prefix> - Get completions
-add <word>        - Increase importance of word
+use <word>        - Increase importance of word
 help              - Show this message
 exit              - Quit program  
                     `)
