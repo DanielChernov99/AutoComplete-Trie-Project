@@ -132,3 +132,11 @@ body {
     font-size: 20px;
     color: #222;
 }
+
+#addResultText.success {
+    color: #1f9d55;
+}
+
+#addResultText.error {
+    color: #d64545;
+}
