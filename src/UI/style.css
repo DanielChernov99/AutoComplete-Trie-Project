@@ -81,6 +81,10 @@ body {
 .search-row {
     margin-bottom: 36px;
 }
+.autocomplete-box {
+    position: relative;
+    width: 100%;
+}
 
 .search-row input {
     width: 100%;
@@ -93,6 +97,41 @@ body {
 
     border-radius: 12px;
     corner-shape: squircle;
+
+}
+.word-list.visible {
+    display: flex;
+}
+
+.word-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    margin-top: 8px;
+
+    list-style: none;
+    background-color: white;
+    border: 2px solid #dfe5ee;
+    border-radius: 12px;
+    corner-shape: squircle;
+
+    z-index: 100;
+    overflow: hidden;
+
+    display:none;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.word-list li {
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+}
+
+.highlighted {
+    background-color: rgba(254, 215, 215);
+    font-weight: 700;
 }
 
 #addInput:focus,

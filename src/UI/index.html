@@ -17,9 +17,12 @@
             <p id="addResultText"></p>
         </div>
         <div class="search-row">
-            <input id="searchInput" type="text" placeholder="Start typing to see suggestions">
+            <div class="autocomplete-box">
+                <input id="searchInput" type="text" placeholder="Start typing to see suggestions">
+                <ul id="suggestionsList" class="word-list"></ul>
+            </div>
         </div>
-        <ul id="suggestionsList"></ul>
+        
         <div class="count-row">
             <p id="countNumber">0</p>
             <p>Words in Dictionary</p>
