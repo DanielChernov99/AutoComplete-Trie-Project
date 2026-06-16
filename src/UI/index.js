@@ -1,23 +1,41 @@
 import AutoCompleteTrie from "../AutoCompleteTrie.js"
 import AutoCompleteController from "../AutoCompleteController.js"
-import ConsoleView from "./ConsoleView.js"
-import promptSync from "prompt-sync"
 
-
-let running = true
 const trieController = new AutoCompleteController()
-const cliView = new ConsoleView() 
-const prompt = promptSync()
 
+const addInput = document.querySelector("#addInput")
+const addButton = document.querySelector("#addButton")
+const actionResultText = document.querySelector("#addResultText")
+const searchInput = document.querySelector("#searchInput")
+const suggestionList = document.querySelector("#suggestionsList")
+const countElement = document.querySelector("#countNumber")
 
-cliView.showWelcome()
+const removeActionMessage =function(){
+    actionResultText.classList.remove("success", "error")
+    actionResultText.textContent = ""
+}  
 
-while(running){
-    let userInput = prompt("> ")
-    const commandResult = trieController.handleCommand(userInput)
-    if(commandResult.commandType ==="exit"){
-        running = false
+addButton.addEventListener("click",() =>{  
+    const inputValue = addInput.value.trim()
+    const commandResult = trieController.handleCommand(`add ${inputValue}`)
+    actionResultText.classList.remove("success", "error")
+
+    if(commandResult.result){
+        actionResultText.textContent = `Added ${commandResult.wordUsed} to dictionary`
+        actionResultText.classList.add("success")
+        addInput.value = ""
     }
-    // cliView.showResult(commandResult)
+    else{
+        actionResultText.textContent = `${commandResult.message}`
+        actionResultText.classList.add("error")
+    }
+    setTimeout(() => removeActionMessage(),3000)
+})
+
+
+
+searchInput.addEventListener("input",() =>{
+    const searchValue = searchInput.value.trim()
+})
+
     
-}

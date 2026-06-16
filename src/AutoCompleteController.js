@@ -29,11 +29,11 @@ export default class AutoCompleteController {
         }
     }
     validateArgs(userInput){
-        if(!userInput) return {result: false,message:"please enter command and word"}
+        if(!userInput) return {result: false,message:"please enter command and word",errorType:"empty"}
 
         const inputArr = userInput.trim().split(/\s+/)
 
-        if (inputArr.length > 2) return {result: false, message:"Too many arguments"}
+        if (inputArr.length > 2) return {result: false, message:"Too many arguments",errorType:"param-overload"}
 
         const command = inputArr[0].toLowerCase()
         const word = inputArr[1]?.toLowerCase()
@@ -42,12 +42,12 @@ export default class AutoCompleteController {
         const allCommands = [...wordCommands, ...noWordCommands]
 
         if(!(allCommands).includes(command)){
-            return {result: false, message:"please enter a valid command"}
+            return {result: false, message:"please enter a valid command",errorType:"not-valid-command"}
         }
         if(wordCommands.includes(command)){          
-            if (!word) return {result: false, message:"please enter the word aswell"}
+            if (!word) return {result: false, message:"please enter the word aswell",errorType:"empty"}
             if (!/^[a-zA-Z]+$/.test(word)) {
-                return { result: false, message: "word must contain only letters" }
+                return { result: false, message: "word must contain only letters",errorType:"not-Letters-Only"}
             }
         }
         else{

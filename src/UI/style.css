@@ -71,7 +71,7 @@ body {
     background-color: #566bd6;
 }
 
-.add-result-row {
+.add-Result-row {
     min-height: 28px;
     margin-bottom: 26px;
 }
@@ -137,8 +137,21 @@ body {
 
 #addResultText.success {
     color: #1f9d55;
+    background-color: rgb(60, 219, 105,0.5);
+    border-radius: 8px;
+    corner-shape: squircle;
+    padding: 1rem 1rem;
+
+    font-weight: 700;
 }
 
 #addResultText.error {
     color: #d64545;
+    background-color: rgb(214, 69, 69, 0.5);
+    border-radius: 8px;
+    corner-shape: squircle;
+    padding: 1rem 1rem;
+
+    font-weight: 700;
+
 }
