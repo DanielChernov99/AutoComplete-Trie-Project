@@ -30,6 +30,9 @@ body {
 
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
 }
+/* ======================================== */
+/* Add Row*/
+/* ======================================== */
 
 .add-row {
     display: flex;
@@ -71,15 +74,9 @@ body {
     background-color: #566bd6;
 }
 
-.add-Result-row {
-    min-height: 28px;
-    margin-bottom: 26px;
-}
-
-#addResultText {
-    margin: 0;
-    font-size: 16px;
-}
+/* ======================================== */
+/* Search Row*/
+/* ======================================== */
 
 .search-row {
     margin-bottom: 36px;
@@ -107,7 +104,9 @@ body {
 .search-row input::placeholder {
     color: #777;
 }
-
+/* ======================================== */
+/* Count Row*/
+/* ======================================== */
 .count-row {
     height: 105px;
     background-color: #f7f9fc;
@@ -129,29 +128,48 @@ body {
     line-height: 1;
 }
 
-.count-row p:last-child {
+.count-row p {
     margin: 4px 0 0 0;
     font-size: 20px;
     color: #222;
 }
 
+/* ======================================== */
+/* add Success/Error Messages */
+/* ======================================== */
+
+.add-Result-row {
+    width: 100%;
+    aspect-ratio: 10 / 1;
+    margin-bottom: 26px;
+}
+
+
+#addResultText {
+    width: 100%;
+    height: 100%;
+
+    padding: 0 1rem;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    border-radius: 8px;
+    corner-shape: squircle;
+}
+
+
 #addResultText.success {
     color: #1f9d55;
     background-color: rgb(60, 219, 105,0.5);
-    border-radius: 8px;
-    corner-shape: squircle;
-    padding: 1rem 1rem;
-
-    font-weight: 700;
+    
 }
 
 #addResultText.error {
     color: #d64545;
     background-color: rgb(214, 69, 69, 0.5);
-    border-radius: 8px;
-    corner-shape: squircle;
-    padding: 1rem 1rem;
-
-    font-weight: 700;
-
 }
